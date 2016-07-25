@@ -1,0 +1,9 @@
+{
+    "name": "anomaly/fixed_amount_discount-extension",
+    "type": "streams-addon",
+    "autoload": {
+        "psr-4": {
+            "Anomaly\\FixedAmountDiscountExtension\\": "src/"
+        }
+    }
+}
