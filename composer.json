@@ -1,6 +1,7 @@
 {
     "name": "anomaly/fixed_amount_discount-extension",
     "type": "streams-addon",
+    "license": "MIT",
     "autoload": {
         "psr-4": {
             "Anomaly\\FixedAmountDiscountExtension\\": "src/"
