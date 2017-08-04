@@ -1,6 +1,6 @@
 <?php namespace Anomaly\FixedAmountDiscountExtension;
 
-use Anomaly\StoreModule\Discount\DiscountExtension;
+use Anomaly\DiscountsModule\Discount\DiscountExtension;
 
 /**
  * Class FixedAmountDiscountExtension
@@ -19,6 +19,6 @@ class FixedAmountDiscountExtension extends DiscountExtension
      *
      * @var null|string
      */
-    protected $provides = 'anomaly.module.store::discount.fixed_amount';
+    protected $provides = 'anomaly.module.discounts::discount.fixed_amount';
 
 }
