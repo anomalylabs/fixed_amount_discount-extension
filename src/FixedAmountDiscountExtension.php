@@ -1,6 +1,7 @@
 <?php namespace Anomaly\FixedAmountDiscountExtension;
 
 use Anomaly\DiscountsModule\Discount\DiscountExtension;
+use Anomaly\StoreModule\Contract\OrderInterface;
 
 /**
  * Class FixedAmountDiscountExtension
@@ -20,5 +21,16 @@ class FixedAmountDiscountExtension extends DiscountExtension
      * @var null|string
      */
     protected $provides = 'anomaly.module.discounts::discount.fixed_amount';
+
+    /**
+     * Calculate the discount.
+     *
+     * @param OrderInterface $order
+     * @return float
+     */
+    public function calculate(OrderInterface $order)
+    {
+        return $order->getSubtotal() * .1;
+    }
 
 }

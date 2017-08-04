@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'title'       => 'Fixed Amount Discount',
+    'title'       => 'Fixed Amount',
     'name'        => 'Fixed Amount Discount Extension',
-    'description' => ''
+    'description' => 'A simple fixed amount discount calculator.',
 ];
