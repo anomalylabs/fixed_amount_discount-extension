@@ -1,7 +1,9 @@
 <?php namespace Anomaly\FixedAmountDiscountExtension;
 
+use Anomaly\CartsModule\Cart\Contract\CartInterface;
+use Anomaly\CartsModule\Modifier\ModifierModel;
 use Anomaly\DiscountsModule\Discount\DiscountExtension;
-use Anomaly\StoreModule\Contract\OrderInterface;
+use Anomaly\FixedAmountDiscountExtension\Command\GetAmount;
 
 /**
  * Class FixedAmountDiscountExtension
@@ -23,14 +25,28 @@ class FixedAmountDiscountExtension extends DiscountExtension
     protected $provides = 'anomaly.module.discounts::discount.fixed_amount';
 
     /**
-     * Calculate the discount.
+     * Apply the discount.
      *
-     * @param OrderInterface $order
-     * @return float
+     * @param $target
      */
-    public function calculate(OrderInterface $order)
+    public function apply($target)
     {
-        return $order->getSubtotal() * .1;
+        foreach ($target->modifiers as $modifier) {
+
+            if ($modifier->entry->toArray() == $this->getDiscount()->toArray()) {
+                return;
+            }
+        }
+
+        (new ModifierModel(
+            [
+                'type'  => 'discount',
+                'cart'  => ($target instanceof CartInterface) ? $target : $target->cart,
+                'item'  => ($target instanceof CartInterface) ? null : $target,
+                'value' => '-' . $this->dispatch(new GetAmount($this)),
+                'entry' => $this->getDiscount(),
+            ]
+        ))->save();
     }
 
 }
